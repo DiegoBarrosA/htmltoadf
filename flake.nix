@@ -1,4 +1,4 @@
-{
+33333333333333333333333333333333333333333333333333333333333333333333333333333{
   description = "My Rust Application with Nix Flakes";
 
   inputs = {
@@ -12,9 +12,8 @@
     flake-utils.lib.eachDefaultSystem (system: {
       packages.default =
         nixpkgs.legacyPackages.${system}.rustPlatform.buildRustPackage {
-          pname = "my-rust-app"; # Replace with your package name
-          version = "0.1.0"; # Replace with your package version
-
+          pname = "html-to-adf"; 
+          version = "0.1.0"; 
           src =
             ./.; # This points to the current directory, which should contain both Cargo.toml and Cargo.lock
 
