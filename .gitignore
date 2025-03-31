@@ -8,5 +8,6 @@
 /test_cases
 /tmp
 /releases
+./result
 .DS_Store
 .git

@@ -1,24 +1,25 @@
 {
-  description = "A Rust project built with Nix Flakes";
+  description = "My Rust Application with Nix Flakes";
 
   inputs = {
-    # Use the latest stable version of Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # or a specific version
+    nixpkgs.url =
+      "github:nixos/nixpkgs/nixos-unstable"; # You can specify a stable version or branch
+    flake-utils.url =
+      "github:numtide/flake-utils"; # Optional, for easier flake management
   };
 
-  outputs = { self, nixpkgs }: let
-    # Define the Rust package
-    rustPackage = nixpkgs.rustPackages.callPackage ./default.nix {};
-  in {
-    # Expose the package
-    packages.x86_64-linux.default = rustPackage;
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system: {
+      packages.default =
+        nixpkgs.legacyPackages.${system}.rustPlatform.buildRustPackage {
+          pname = "my-rust-app"; # Replace with your package name
+          version = "0.1.0"; # Replace with your package version
 
-    # Optionally, you can also expose a development shell
-    devShell.x86_64-linux = nixpkgs.mkShell {
-      buildInputs = [
-        nixpkgs.rustc
-        nixpkgs.cargo
-      ];
-    };
-  };
+          src =
+            ./.; # This points to the current directory, which should contain both Cargo.toml and Cargo.lock
+
+          cargoHash = "sha256-XXEfhinGynLlLBTa0rZE0XurATfgF52eBnYQzApr5YI=";
+          # buildInputs = [ pkgs.someDependency ];
+        };
+    });
 }
