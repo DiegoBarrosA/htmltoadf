@@ -17,7 +17,7 @@
           src =
             ./.; # This points to the current directory, which should contain both Cargo.toml and Cargo.lock
 
-          cargoHash = "sha256-XXEfhinGynLlLBTa0rZE0XurATfgF52eBnYQzApr5YI=";
+          cargoHash = "sha256-q+rSH737lR47WERVj39RWq1NhEVi03e3jotrEJIVYgU=";
           # buildInputs = [ pkgs.someDependency ];
         };
     });
